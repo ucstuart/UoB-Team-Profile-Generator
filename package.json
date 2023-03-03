@@ -1,0 +1,28 @@
+{
+  "name": "uob-team-profile-generator",
+  "version": "1.0.0",
+  "description": "UoB Team Profile Generator",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ucstuart/UoB-Team-Profile-Generator.git"
+  },
+  "author": "Stuart Rudd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ucstuart/UoB-Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/ucstuart/UoB-Team-Profile-Generator#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "inquirer": "^6.5.2",
+    "jest": "^29.4.3",
+    "test": "^3.3.0"
+  }
+}
