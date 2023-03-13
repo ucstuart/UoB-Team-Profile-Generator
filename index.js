@@ -120,6 +120,12 @@ function start () {
         inquirer.prompt([
             // question asking what we should make next
                 // choices(engineer, intern, I dont want to add anything else)
+          {
+            type: "list",
+            name: "EmployeeChoice",
+            message: "Please select the team member type you would like to add next, select None if your done!",
+            choices: ["Engineer","Intern","None"],
+          },
         ]).then(userChoice => {
             /* conditional that decides which of the below functions to call
                 based on userChoice. 
@@ -127,12 +133,151 @@ function start () {
                 - If none of the choices (engineer or employee) have been chosen default to buildTeam()
                
             */
+            // if (userChoice.EmployeeChoice === "Engineer") {
+            //   addEngineer();
+            // } else if (userChoice.EmployeeChoice === "Intern") {
+            //   addIntern();
+            // } else {
+            //   buildTeam();
+            // }
+        
+            // Using Switch instead of IF
+
+            switch (userChoice.EmployeeChoice) {
+              case "Engineer":
+                addEngineer();
+                break;
+              case "Intern":
+                addIntern();
+                break;
+         
+              default:
+                buildTeam();
+            }
+            
         })
     }
 
     // function to handle generating engineer
 
+    function addEngineer() {
+
+      inquirer.prompt([
+        {
+          type: "input",
+          name: "engineerName",
+          message: "What is the Engineers name?",
+          validate: answer => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter at least one character.";
+          }
+        },
+        {
+            type: "input",
+            name: "engineerId",
+            message: "What is the Engineer ID?",
+            validate: answer => {
+              if (answer !== "") {
+                return true;
+              }
+              return "Please enter at least one character.";
+            }
+        },
+        {
+            type: "input",
+            name: "engineerEmail",
+            message: "What is the Engineers Email Address?",
+            validate: answer => {
+              if (answer !== "") {
+                return true;
+              }
+              return "Please enter at least one character.";
+            }
+        },
+        {
+            type: "input",
+            name: "engineerGitHub",
+            message: "What is the Engineers GitHub?",
+            validate: answer => {
+              if (answer !== "") {
+                return true;
+              }
+              return "Please enter at least one character.";
+            }
+        },
+      ]).then(answers => {
+        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGitHub);
+        // push to team array
+        answers.push(engineer);
+        // call the next function that will ask what type of employee will be created next
+        createTeam();
+      })
+}
+
+
+    
+
     // function to handle generating intern
+
+    function addIntern() {
+
+      inquirer.prompt([
+        {
+          type: "input",
+          name: "internName",
+          message: "What is the Intern name?",
+          validate: answer => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter at least one character.";
+          }
+        },
+        {
+            type: "input",
+            name: "internId",
+            message: "What is the Intern ID?",
+            validate: answer => {
+              if (answer !== "") {
+                return true;
+              }
+              return "Please enter at least one character.";
+            }
+        },
+        {
+            type: "input",
+            name: "internEmail",
+            message: "What is the Intern Email Address?",
+            validate: answer => {
+              if (answer !== "") {
+                return true;
+              }
+              return "Please enter at least one character.";
+            }
+        },
+        {
+            type: "input",
+            name: "internSchool",
+            message: "What is the Intern School?",
+            validate: answer => {
+              if (answer !== "") {
+                return true;
+              }
+              return "Please enter at least one character.";
+            }
+        },
+      ]).then(answers => {
+        const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+        // push to team array
+        answers.push(intern);
+        // call the next function that will ask what type of employee will be created next
+        createTeam();
+      })
+}
+
+
 
     // function to buildTeam - will use fs.writeFileSync & pass in the outputPath created above, call to render (dont forget to pass in the employee array), & "utf-8"
         
