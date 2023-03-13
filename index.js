@@ -72,13 +72,43 @@ function start () {
                 return "Please enter at least one character.";
               }
             },
-            /* {ask for id},
-              {ask for email},
-              {ask for office number}
-             */
+            {
+                type: "input",
+                name: "managerId",
+                message: "What is the Managers ID?",
+                validate: answer => {
+                  if (answer !== "") {
+                    return true;
+                  }
+                  return "Please enter at least one character.";
+                }
+            },
+            {
+                type: "input",
+                name: "managerEmail",
+                message: "What is the Managers Email Address?",
+                validate: answer => {
+                  if (answer !== "") {
+                    return true;
+                  }
+                  return "Please enter at least one character.";
+                }
+            },
+            {
+                type: "input",
+                name: "managerOfficeNumber",
+                message: "What is the Managers Office Number?",
+                validate: answer => {
+                  if (answer !== "") {
+                    return true;
+                  }
+                  return "Please enter at least one character.";
+                }
+            },
           ]).then(answers => {
             const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
             // push to team array
+            answers.push(manager);
             // call the next function that will ask what type of employee will be created next
             createTeam();
           })
