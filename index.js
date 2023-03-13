@@ -10,6 +10,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
 
+const team = [];
+
 
 /* TODO: Write Code to gather information about the development team members, and render the HTML file.
 
@@ -108,7 +110,7 @@ function start () {
           ]).then(answers => {
             const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
             // push to team array
-            answers.push(manager);
+            team.push(manager);
             // call the next function that will ask what type of employee will be created next
             createTeam();
           })
@@ -210,7 +212,7 @@ function start () {
       ]).then(answers => {
         const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGitHub);
         // push to team array
-        answers.push(engineer);
+        team.push(engineer);
         // call the next function that will ask what type of employee will be created next
         createTeam();
       })
@@ -271,7 +273,7 @@ function start () {
       ]).then(answers => {
         const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
         // push to team array
-        answers.push(intern);
+        team.push(intern);
         // call the next function that will ask what type of employee will be created next
         createTeam();
       })
@@ -280,6 +282,12 @@ function start () {
 
 
     // function to buildTeam - will use fs.writeFileSync & pass in the outputPath created above, call to render (dont forget to pass in the employee array), & "utf-8"
+
+    function buildTeam() {
+      fs.writeFileSync(outputPath, render(team),"utf-8");
+
+
+    }
         
     createManager(); // starts of the whole chain of events. 
 }
